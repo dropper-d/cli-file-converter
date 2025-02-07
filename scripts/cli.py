@@ -25,7 +25,7 @@ def main(
 ):
     """
     Convert files between JSON, YAML y TOML.
-    by: dropper-d
+    By: dropper-d
     """
     if t == "yaml":
         if f.endswith(".json"):
