@@ -15,7 +15,7 @@ A simple command-line tool to convert between JSON, YAML, and TOML formats.
 - typer (included)
 - pyyaml (included)
 - toml (included)
-- pipx
+- [pipx](https://github.com/pypa/pipx)
 
 ## Installation
 
