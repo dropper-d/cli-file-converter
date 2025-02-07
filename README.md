@@ -31,7 +31,7 @@ pipx install .
 
 Basic usage:
 ```bash
-fconv --f file_input.format --o file_output.format --t output format
+fconv --f path/to/input/file --o path/to/output/file --t output format
 ```
 
 ### Options
@@ -50,12 +50,12 @@ fconv --f config.json --o config.yaml --t yaml
 
 Convert YAML to TOML:
 ```bash
-fconv --f config.yaml --o config.toml --t toml
+fconv --f test/cli-file-converter/config.yaml --o deploy/stable/config.toml --t toml
 ```
 
 Convert JSON to YAML with pretty printing:
 ```bash
-fconv --f config.json --o config.yaml --t yaml --p
+fconv --f test/cli-file-converter/config.json --o deploy/stable/config.yaml --t yaml --p
 ```
 
 ## Supported Conversions
