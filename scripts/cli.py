@@ -1,18 +1,5 @@
 import typer
-import json
-import yaml
-from .converter import (
-    convert_json_to_yaml,
-    convert_json_to_toml,
-    convert_yaml_to_json,
-    convert_yaml_to_toml,
-    convert_toml_to_json,
-    convert_toml_to_yaml,
-    load_json,
-    load_yaml,
-    load_toml,
-    save_output
-)
+from .converter import convert_file
 
 app = typer.Typer()
 
@@ -27,51 +14,21 @@ def main(
     Convert files between JSON, YAML y TOML.
     By: dropper-d
     """
-    if t == "yaml":
-        if f.endswith(".json"):
-            data = load_json(f)
-            result = convert_json_to_yaml(data)
-        elif f.endswith(".toml"):
-            data = load_toml(f)
-            result = convert_toml_to_yaml(data)
-        else:
-            typer.echo("Format is not supported to YAML.")
-            raise typer.Exit(1)
+    supported_formats = ["json", "yaml", "toml"]
+    
+    input_fmt = f.split('.')[-1]
+    output_fmt = t.lower()
 
-    elif t == "toml":
-        if f.endswith(".json"):
-            data = load_json(f)
-            result = convert_json_to_toml(data)
-        elif f.endswith(".yaml"):
-            data = load_yaml(f)
-            result = convert_yaml_to_toml(data)
-        else:
-            typer.echo("Format is not supported to TOML.")
-            raise typer.Exit(1)
-
-    elif t == "json":
-        if f.endswith(".yaml"):
-            data = load_yaml(f)
-            result = convert_yaml_to_json(data)
-        elif f.endswith(".toml"):
-            data = load_toml(f)
-            result = convert_toml_to_json(data)
-        else:
-            typer.echo("Format is not supported to JSON.")
-            raise typer.Exit(1)
-
-    else:
-        typer.echo("Output format is not supported.")
+    if input_fmt not in supported_formats or output_fmt not in supported_formats:
+        typer.echo("Both input and output formats must be one of json, yaml, or toml.")
         raise typer.Exit(1)
-
-    if p and t in ["json", "yaml"]:
-        if t == "json":
-            result = json.dumps(json.loads(result), indent=4)
-        elif t == "yaml":
-            result = yaml.dump(yaml.safe_load(result), default_flow_style=False)
-
-    save_output(o, result)
-    typer.echo(f"File converted and saved in {o}")
+    
+    try:
+        convert_file(f, input_fmt, o, output_fmt)
+        typer.echo(f"File converted and saved in {o}")
+    except Exception as e:
+        typer.echo(f"Error: {str(e)}")
+        raise typer.Exit(1)
 
 if __name__ == "__main__":
     app()
