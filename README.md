@@ -23,7 +23,7 @@ Clone the repository and install using pip:
 
 ```bash
 git clone https://github.com/dropper-d/cli-file-converter
-cd format-converter
+cd cli-file-converter
 pipx install .
 ```
 
