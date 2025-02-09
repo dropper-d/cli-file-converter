@@ -22,7 +22,7 @@ A simple command-line tool to convert between JSON, YAML, and TOML formats.
 Clone the repository and install using pip:
 
 ```bash
-git clone https://github.com/dropper-d/format-converter.git
+git clone https://github.com/dropper-d/cli-file-converter
 cd format-converter
 pipx install .
 ```
